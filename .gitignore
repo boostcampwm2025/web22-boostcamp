@@ -23,6 +23,7 @@ coverage
 out/
 build
 dist
+dist-ssr
 
 
 # Debug
@@ -33,3 +34,13 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
