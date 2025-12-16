@@ -1,8 +1,9 @@
-import { config } from "@repo/eslint-config/react-internal";
+import { config as reactConfig } from '@repo/eslint-config/react-internal';
 
 export default [
-  ...config,
+  ...reactConfig,
+
   {
-    ignores: ["dist/**", "node_modules/**"],
+    ignores: ['dist/**', 'node_modules/**'],
   },
 ];

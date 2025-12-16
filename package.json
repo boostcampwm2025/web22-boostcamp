@@ -12,6 +12,7 @@
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^6.0.0",
     "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",
     "turbo": "^2.6.3",
     "typescript": "5.9.2"
@@ -19,5 +20,21 @@
   "packageManager": "pnpm@9.0.0",
   "engines": {
     "node": ">=18"
+  },
+  "lint-staged": {
+    "apps/fe/**/*.{ts,tsx,js,jsx}": [
+      "eslint --config apps/fe/eslint.config.js --fix",
+      "prettier --write"
+    ],
+    "apps/be/**/*.ts": [
+      "eslint --config apps/be/eslint.config.mjs --fix",
+      "prettier --write"
+    ],
+    "packages/**/*.{js,ts}": [
+      "prettier --write"
+    ],
+    "**/*.{json,md}": [
+      "prettier --write"
+    ]
   }
 }
