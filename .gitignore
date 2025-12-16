@@ -11,6 +11,7 @@ node_modules
 
 # Testing
 coverage
+.nyc_output
 
 # Turbo
 .turbo
@@ -27,6 +28,8 @@ dist-ssr
 
 
 # Debug
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -44,3 +47,25 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# temp directory
+.temp
+.tmp
+
+# IDEs and editors
+.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json

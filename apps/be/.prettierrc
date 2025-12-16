@@ -1,0 +1,36 @@
+{
+  "singleQuote": true,
+  "jsxSingleQuote": false,
+  "trailingComma": "all",
+  "semi": true,
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "bracketSpacing": true,
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "overrides": [
+    {
+      "files": ["projects/apps/be/**/*.ts"],
+      "options": {
+        "parser": "typescript",
+        "plugins": ["@trivago/prettier-plugin-sort-imports"],
+        "importOrder": ["^@nestjs", "^@?\\w", "*"],
+        "importOrderParserPlugins": ["typescript", "decorators-legacy"]
+      }
+    },
+    {
+      "files": ["projects/apps/fe/**/*.ts", "projects/apps/fe/**/*.tsx"],
+      "options": {
+        "importOrder": ["^react", "^@", "\\.(png|jpe?g|gif|svg|webp)$"],
+        "plugins": [
+          "@trivago/prettier-plugin-sort-imports",
+          "prettier-plugin-tailwindcss"
+        ],
+        "tailwindFunctions": ["cva", "cx", "cn"]
+      }
+    }
+  ]
+}
