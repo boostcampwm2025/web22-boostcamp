@@ -13,23 +13,19 @@
   "importOrderSortSpecifiers": true,
   "overrides": [
     {
-      "files": ["projects/apps/be/**/*.ts"],
+      "files": ["./apps/be/**/*.ts"],
       "options": {
         "parser": "typescript",
         "plugins": ["@trivago/prettier-plugin-sort-imports"],
-        "importOrder": ["^@nestjs", "^@?\\w", "*"],
+        "importOrder": ["^@nestjs", "^@", ".*"],
         "importOrderParserPlugins": ["typescript", "decorators-legacy"]
       }
     },
     {
-      "files": ["projects/apps/fe/**/*.ts", "projects/apps/fe/**/*.tsx"],
+      "files": ["./apps/fe/**/*.ts", "./apps/fe/**/*.tsx"],
       "options": {
-        "importOrder": ["^react", "^@", "\\.(png|jpe?g|gif|svg|webp)$"],
-        "plugins": [
-          "@trivago/prettier-plugin-sort-imports",
-          "prettier-plugin-tailwindcss"
-        ],
-        "tailwindFunctions": ["cva", "cx", "cn"]
+        "importOrder": ["^react", "^@", ".*"],
+        "plugins": ["@trivago/prettier-plugin-sort-imports"]
       }
     }
   ]
