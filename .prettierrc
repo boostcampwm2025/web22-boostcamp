@@ -1,0 +1,32 @@
+{
+  "singleQuote": true,
+  "jsxSingleQuote": false,
+  "trailingComma": "all",
+  "semi": true,
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "bracketSpacing": true,
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "overrides": [
+    {
+      "files": ["./apps/be/**/*.ts"],
+      "options": {
+        "parser": "typescript",
+        "plugins": ["@trivago/prettier-plugin-sort-imports"],
+        "importOrder": ["^@nestjs", "^@", ".*"],
+        "importOrderParserPlugins": ["typescript", "decorators-legacy"]
+      }
+    },
+    {
+      "files": ["./apps/fe/**/*.ts", "./apps/fe/**/*.tsx"],
+      "options": {
+        "importOrder": ["^react", "^@", ".*"],
+        "plugins": ["@trivago/prettier-plugin-sort-imports"]
+      }
+    }
+  ]
+}
