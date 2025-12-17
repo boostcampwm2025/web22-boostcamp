@@ -23,9 +23,13 @@ export class ObjectStorageProvider {
 
   // TODO : 스토리지 파일 업로드되는 디렉토리는 어떻게 관리할지 고민
   // 일단 test 디렉토리로 고정
-  async upload(buffer: Buffer, contentType: string, filename: string): Promise<string> {
+  async upload(
+    buffer: Buffer,
+    contentType: string,
+    filename = 'audio.wav',
+  ): Promise<string> {
     const key = `test/${Date.now()}-${filename}`;
-
+  
     await this.client.send(
       new PutObjectCommand({
         Bucket: this.bucket,
@@ -34,7 +38,7 @@ export class ObjectStorageProvider {
         ContentType: contentType,
       }),
     );
-
+  
     return key;
   }
 }
