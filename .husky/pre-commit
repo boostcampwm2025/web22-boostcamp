@@ -1,0 +1,13 @@
+echo "🔎 [BE] 타입 정합성 검사를 수행합니다..."
+npx tsc --noEmit -p apps/be/tsconfig.json || exit 1
+
+echo "🔎 [FE] 타입 정합성 검사를 수행합니다..."
+npx tsc --noEmit -p apps/fe/tsconfig.app.json || exit 1
+
+echo "🚦 스테이징된 파일 검사(Lint-staged)를 시작합니다..."
+npx lint-staged || exit 1
+
+# echo "🧪 테스트를 수행합니다..."
+# pnpm test || exit 1
+
+echo "✅ 모든 검사를 통과했습니다. 커밋을 진행합니다!"
