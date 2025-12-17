@@ -4,6 +4,7 @@ import { AssessService } from '../assess/assess.service';
 import { SpeechRequestDto } from './dto/speech-request.dto';
 import { ClovaSttProvider } from './provider/clova-stt.provider';
 import { ObjectStorageProvider } from './provider/object-storage.provider';
+import { normalizeAudio } from '../common/audio/normalize-audio';
 
 @Injectable()
 export class SpeechService {
@@ -21,8 +22,20 @@ export class SpeechService {
       throw new BadRequestException('Audio file is required');
     }
 
-    const objectKey = await this.storage.upload(file);
+    console.log({
+      originalName: file.originalname,
+      mime: file.mimetype,
+      size: file.size,
+    });
 
+    const { buffer, contentType, filename } =
+    await normalizeAudio(file);
+
+    const objectKey = await this.storage.upload(
+      buffer,
+      contentType,
+      filename,
+    );
     const language = dto.language ?? 'ko-KR';
     const result = await this.clova.requestSTT(objectKey, language);
 
