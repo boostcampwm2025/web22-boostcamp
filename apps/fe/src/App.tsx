@@ -15,21 +15,44 @@ const App = () => {
   const [suggestions, setSuggestions] = useState('');
   const [followupQuestions, setFollowupQuestions] = useState('');
 
+  // 브라우저가 지원하는 mimeType 자동 선택
+  // 녹음해도 되는지 방어코드!!
+  const getSupportedMimeType = () => {
+    const candidates = [
+      'audio/webm;codecs=opus',
+      'audio/ogg;codecs=opus',
+      'audio/mp4', // Safari / iOS
+    ];
+
+    return candidates.find(type =>
+      typeof MediaRecorder !== 'undefined' &&
+      MediaRecorder.isTypeSupported(type),
+    );
+  };
+
   const startRecording = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
 
-    const mediaRecorder = new MediaRecorder(stream);
+    const mimeType = getSupportedMimeType();
+    if (!mimeType) {
+      alert('이 브라우저는 음성 녹음을 지원하지 않습니다.');
+      return;
+    }
+
+    const mediaRecorder = new MediaRecorder(stream, { mimeType });
     mediaRecorderRef.current = mediaRecorder;
     chunksRef.current = [];
 
     mediaRecorder.ondataavailable = (e) => {
-      chunksRef.current.push(e.data);
+      if (e.data.size > 0) {
+        chunksRef.current.push(e.data);
+      }
     };
 
-    mediaRecorder.onstop = sendAudioToServer;
+    mediaRecorder.onstop = () => sendAudioToServer(mimeType);
 
     mediaRecorder.start();
-    setStatus('🎙 녹음 중...');
+    setStatus(`🎙 녹음 중 (${mimeType})`);
   };
 
   const stopRecording = () => {
@@ -37,13 +60,20 @@ const App = () => {
     setStatus('⏳ 처리 중...');
   };
 
-  const sendAudioToServer = async () => {
-    const blob = new Blob(chunksRef.current, {
-      type: 'audio/wav',
-    });
+  const sendAudioToServer = async (mimeType: string) => {
+    const blob = new Blob(chunksRef.current, { type: mimeType });
+
+    // 확장자는 "의미만 전달" 용도 -> filename에 추가해주기 위함
+    const ext = mimeType.includes('webm')
+      ? 'webm'
+      : mimeType.includes('ogg')
+      ? 'ogg'
+      : mimeType.includes('mp4')
+      ? 'm4a'
+      : 'dat';
 
     const form = new FormData();
-    form.append('audio', blob, 'record.wav');
+    form.append('audio', blob, `record.${ext}`);
 
     const res = await fetch('/speech/stt', {
       method: 'POST',
