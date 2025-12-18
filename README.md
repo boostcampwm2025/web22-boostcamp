@@ -1,135 +1,77 @@
-# Turborepo starter
+# 💬 말하면서 배우는 CS 지식 AI 학습 서비스, Talk It
 
-This Turborepo starter is maintained by the Turborepo core team.
+<div align="center">
+  <img width="1039" height="493" alt="이미지" src="https://github.com/user-attachments/assets/4a877f6a-01b4-47d6-8380-42e71d3b993e" />
+  <br/>
+  <br/>
+  <a href="https://www.notion.so/Web22-2c3d2bdba92980ac820aed84d0d4e12d?source=copy_link">팀 노션</a>
+  &nbsp;|&nbsp;
+  <a href="https://www.figma.com/board/CT49cFNdGPoucTTtq4UJ3u/%ED%95%B4%EB%82%BC-%ED%8C%80%EC%9D%98-%EC%8A%A4%ED%94%84%EB%A6%B0%ED%8A%B8?node-id=0-1&t=Wa9hhFvaDmqi3BrX-1">팀 스프린트 캔버스</a>
+  &nbsp;|&nbsp;
+  <a href="https://www.figma.com/design/pdCdKem74PweQIl0hVt049/%ED%95%B4%EB%82%BC-%ED%8C%80%EC%9D%98-%EC%84%9C%EB%B9%84%EC%8A%A4-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=0-1&t=ovdnjVtuWWmxYeGe-1">팀 피그마</a>
+</div>
 
-## Using this example
+<br>
 
-Run the following command:
+## 🖼️ 프로젝트 소개
 
-```sh
-npx create-turbo@latest
-```
+**Talk It**은 사용자가 CS 개념을 직접 말로 설명하면, AI가 이를 인식하여 개념의 정확도를 평가하고 부족한 부분을 보완해주는 학습 플랫폼입니다. 단순한 평가에 그치지 않고 꼬리 질문을 통해 깊이 있는 학습을 유도하며, 반복 학습 구조와 다음 학습 주제 추천까지 제공합니다.
 
-## What's inside?
+여기에 레벨, 티어, 뱃지, 책 쌓기 애니메이션, 친구 랭킹, 1:1 배틀 등 게임화 요소를 더해 학습 지속력을 높이는 것이 핵심입니다.
 
-This Turborepo includes the following packages/apps:
+## 🎯 핵심 기능
 
-### Apps and Packages
+## 🛠️ 기술 스택
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+## 👥 **팀원 소개**
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+### 🐋 Web22 해낼 팀
 
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
-```
-
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
-```
-
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+<div align="center">
+<table>
+  <tr align="center">
+    <th>J052 김연신</th>
+    <th>J174 윤혜정</th>
+    <th>J180 이다은</th>
+    <th>J202 이우현</th>
+  </tr>
+  <tr align="center">
+    <td>
+      <img src="http://github.com/YeonShin.png" width="130px"/>
+      <br/>
+      <a href="http://github.com/YeonShin" target="_blank">
+       <b>YeonShin</b>
+      </a>
+      <br/>
+      <sup>희망 직무: 프론트엔드</sup>
+    </td>
+    <td>
+      <img src="http://github.com/hjyoon99.png" width="130px"/>
+      <br/>
+      <a href="http://github.com/hjyoon99" target="_blank">
+       <b>hjyoon99</b>
+      </a>
+      <br/>
+      <sup>희망 직무: 백엔드</sup>
+    </td>
+    <td>
+      <img src="http://github.com/llddang.png" width="130px"/>
+      <br/>
+      <a href="http://github.com/llddang" target="_blank">
+       <b>llddang</b>
+      </a>
+      <br/>
+      <sup>희망 직무: 프론트엔드</sup>
+    </td>
+    <td>
+      <img src="http://github.com/woohyun365.png" width="130px"/>
+      <br/>
+      <a href="http://github.com/woohyun365" target="_blank">
+       <b>woohyun365</b>
+      </a>
+      <br/>
+      <sup>희망 직무: 백엔드</sup>
+    </td>
+  </tr>
+</table>
+</div>
