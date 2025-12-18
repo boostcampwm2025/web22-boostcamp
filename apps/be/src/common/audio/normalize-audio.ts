@@ -1,19 +1,9 @@
-import { mimeToExt } from './mime-to-ext';
 import { audioToWav } from './audio-to-wav';
+import { mimeToExt } from './mime-to-ext';
 
-const STT_SUPPORTED_EXT = [
-  'mp3',
-  'aac',
-  'ac3',
-  'ogg',
-  'flac',
-  'wav',
-  'm4a',
-];
+const STT_SUPPORTED_EXT = ['mp3', 'aac', 'ac3', 'ogg', 'flac', 'wav', 'm4a'];
 
-export async function normalizeAudio(
-  file: Express.Multer.File,
-): Promise<{
+export async function normalizeAudio(file: Express.Multer.File): Promise<{
   buffer: Buffer;
   contentType: string;
   filename: string;

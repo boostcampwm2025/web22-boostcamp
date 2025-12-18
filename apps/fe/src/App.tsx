@@ -24,9 +24,8 @@ const App = () => {
       'audio/mp4', // Safari / iOS
     ];
 
-    return candidates.find(type =>
-      typeof MediaRecorder !== 'undefined' &&
-      MediaRecorder.isTypeSupported(type),
+    return candidates.find(
+      (type) => typeof MediaRecorder !== 'undefined' && MediaRecorder.isTypeSupported(type),
     );
   };
 
@@ -67,10 +66,10 @@ const App = () => {
     const ext = mimeType.includes('webm')
       ? 'webm'
       : mimeType.includes('ogg')
-      ? 'ogg'
-      : mimeType.includes('mp4')
-      ? 'm4a'
-      : 'dat';
+        ? 'ogg'
+        : mimeType.includes('mp4')
+          ? 'm4a'
+          : 'dat';
 
     const form = new FormData();
     form.append('audio', blob, `record.${ext}`);

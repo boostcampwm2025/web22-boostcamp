@@ -28,14 +28,9 @@ export class SpeechService {
       size: file.size,
     });
 
-    const { buffer, contentType, filename } =
-    await normalizeAudio(file);
+    const { buffer, contentType, filename } = await normalizeAudio(file);
 
-    const objectKey = await this.storage.upload(
-      buffer,
-      contentType,
-      filename,
-    );
+    const objectKey = await this.storage.upload(buffer, contentType, filename);
     const language = dto.language ?? 'ko-KR';
     const result = await this.clova.requestSTT(objectKey, language);
 

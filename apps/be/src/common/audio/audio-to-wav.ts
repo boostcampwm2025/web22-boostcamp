@@ -1,8 +1,8 @@
 import { exec } from 'child_process';
-import { writeFile, readFile, unlink } from 'fs/promises';
+import { randomUUID } from 'crypto';
+import { readFile, unlink, writeFile } from 'fs/promises';
 import { tmpdir } from 'os';
 import { join } from 'path';
-import { randomUUID } from 'crypto';
 
 export async function audioToWav(
   audioBuffer: Buffer,
@@ -31,9 +31,6 @@ export async function audioToWav(
 
     return await readFile(outputPath);
   } finally {
-    await Promise.allSettled([
-      unlink(inputPath),
-      unlink(outputPath),
-    ]);
+    await Promise.allSettled([unlink(inputPath), unlink(outputPath)]);
   }
 }
