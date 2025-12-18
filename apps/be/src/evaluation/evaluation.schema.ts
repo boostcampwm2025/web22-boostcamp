@@ -15,7 +15,7 @@ export const EvaluationResultSchema = z.object({
       type: z.enum(['missing_required', 'misconception', 'unclear_expression', 'structure_issue']),
       id: z.string(),
       detail: z.string(),
-      evidence: z.string(),
+      evidence: z.string().default(''),
     }),
   ),
   summary: z.string(),
