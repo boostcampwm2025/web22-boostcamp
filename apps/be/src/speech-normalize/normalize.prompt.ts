@@ -8,7 +8,7 @@ export function buildNormalizePrompt(sttText: string) {
 - CS 개념의 옳고 그름은 판단하지 않는다.
 - 사용자의 의도를 최대한 보존하되, 추정한 부분은 반드시 표시한다.
 - 새로운 정보를 추가하지 않는다.
-- 출력은 JSON으로만 한다. (코드블록 금지)
+- 출력은 하단 스키마를 준수한 유효한 JSON으로만 한다. 설명, 주석, 추가 텍스트를 절대 포함하지 마라. (코드블록 금지)
 출력 JSON 스키마:
 {
   "normalized_text": string,
