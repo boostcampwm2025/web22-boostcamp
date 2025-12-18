@@ -41,6 +41,7 @@ export class ClovaService {
 
     const contentType = res.headers.get('content-type') ?? '';
     const rawText = await res.text(); // ✅ 먼저 text로 받기
+    console.log('rawText: ', rawText);
 
     let json: any;
     try {
