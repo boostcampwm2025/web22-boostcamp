@@ -27,6 +27,28 @@ export class EvaluationService {
     normalized_text: string;
     unclear_segments: string[];
   }): Promise<{ requestId: string; result: EvaluationResult }> {
+    // 평가 진입 가드 - 빈 입력 처리
+    if (!input.normalized_text || input.normalized_text.trim() === '') {
+      return {
+        requestId: 'empty-input',
+        result: {
+          topic: input.topic,
+          level: input.level,
+          keyword_hits: {},
+          score: {
+            overall: 0,
+            concept_understanding: 0,
+            terminology_accuracy: 0,
+            clarity: 0,
+          },
+          issues: [],
+          summary: '사용자 답변이 비어 있습니다.',
+          fix_suggestions: [],
+          followup_questions: [],
+        },
+      };
+    }
+
     const rubric = this.rubricLoader.load(input.topic, input.level);
 
     const { system, user } = buildEvaluationPrompt({
