@@ -7,9 +7,21 @@ import axios from 'axios';
 export class ClovaSttProvider {
   constructor(private config: ConfigService) {}
 
+  // 안전한 URL 조합기: base의 꼬리 슬래시/중복 슬래시를 정규화
+  private joinUrl(base: string, path: string): string {
+    const cleanedBase = (base ?? '').replace(/\/+$/, '');
+    const cleanedPath = (path ?? '').replace(/^\/+/, '');
+    return `${cleanedBase}/${cleanedPath}`;
+  }
+
   async requestSTT(objectKey: string, language: string): Promise<string> {
+    const url = this.joinUrl(
+      this.config.get<string>('CLOVA_SPEECH_INVOKE_URL') ?? '',
+      'recognizer/object-storage',
+    );
+
     const response = await axios.post(
-      `${this.config.get('CLOVA_SPEECH_INVOKE_URL')}recognizer/object-storage`,
+      url,
       {
         dataKey: objectKey,
         language,

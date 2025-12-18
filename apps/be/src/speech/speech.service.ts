@@ -1,19 +1,22 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
+
+import { AssessService } from '../assess/assess.service';
+import { SpeechRequestDto } from './dto/speech-request.dto';
 import { ClovaSttProvider } from './provider/clova-stt.provider';
 import { ObjectStorageProvider } from './provider/object-storage.provider';
-import { SpeechRequestDto } from './dto/speech-request.dto';
 
 @Injectable()
 export class SpeechService {
   constructor(
     private readonly storage: ObjectStorageProvider,
     private readonly clova: ClovaSttProvider,
+    private readonly assessService: AssessService,
   ) {}
 
   async transcribe(
     file: Express.Multer.File,
     dto: SpeechRequestDto,
-  ): Promise<string> {
+  ): Promise<{ transcript: string; assessment: any }> {
     if (!file) {
       throw new BadRequestException('Audio file is required');
     }
@@ -23,6 +26,12 @@ export class SpeechService {
     const language = dto.language ?? 'ko-KR';
     const result = await this.clova.requestSTT(objectKey, language);
 
-    return result;
+    const assessment = await this.assessService.assess({
+      topic: 'UDP',
+      level: 'junior',
+      sttText: result,
+    });
+
+    return { transcript: result, assessment };
   }
 }

@@ -4,7 +4,6 @@
 
 export default App;
 */
-
 import { useRef, useState } from 'react';
 
 const App = () => {
@@ -12,6 +11,9 @@ const App = () => {
   const chunksRef = useRef<Blob[]>([]);
   const [status, setStatus] = useState('대기 중');
   const [transcript, setTranscript] = useState('');
+  const [summary, setSummary] = useState('');
+  const [suggestions, setSuggestions] = useState('');
+  const [followupQuestions, setFollowupQuestions] = useState('');
 
   const startRecording = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -52,6 +54,22 @@ const App = () => {
     console.log('STT 결과:', data);
 
     setTranscript(data.transcript ?? '(인식 결과 없음)');
+    // data.assessment.evaluation에서 summary, fix_suggestions, followup_questions 등을 추출하여 표시
+    setSummary(
+      data.assessment
+        ? JSON.stringify(data.assessment?.evaluation.result.summary, null, 2)
+        : '(평가 요약 없음)',
+    );
+    setSuggestions(
+      data.assessment
+        ? JSON.stringify(data.assessment?.evaluation.result.fix_suggestions, null, 2)
+        : '(수정 제안 없음)',
+    );
+    setFollowupQuestions(
+      data.assessment
+        ? JSON.stringify(data.assessment.evaluation.result.followup_questions, null, 2)
+        : '(후속 질문 없음)',
+    );
     setStatus('완료');
   };
 
@@ -59,10 +77,12 @@ const App = () => {
     <div style={{ padding: 20 }}>
       <h2>STT 테스트</h2>
 
-      <p><strong>상태:</strong> {status}</p>
+      <p>
+        <strong>상태:</strong> {status}
+      </p>
 
       <button onClick={startRecording}>🎙 녹음 시작</button>
-      <button onClick={stopRecording} >⏹ 녹음 종료</button>
+      <button onClick={stopRecording}>⏹ 녹음 종료</button>
 
       <hr />
 
@@ -76,6 +96,39 @@ const App = () => {
         }}
       >
         {transcript}
+      </pre>
+      <h3>평가 요약</h3>
+      <pre
+        style={{
+          background: '#f5f5f5',
+          padding: 12,
+          minHeight: 80,
+          whiteSpace: 'pre-wrap',
+        }}
+      >
+        {summary}
+      </pre>
+      <h3>수정 제안</h3>
+      <pre
+        style={{
+          background: '#f5f5f5',
+          padding: 12,
+          minHeight: 80,
+          whiteSpace: 'pre-wrap',
+        }}
+      >
+        {suggestions}
+      </pre>
+      <h3>후속 질문</h3>
+      <pre
+        style={{
+          background: '#f5f5f5',
+          padding: 12,
+          minHeight: 80,
+          whiteSpace: 'pre-wrap',
+        }}
+      >
+        {followupQuestions}
       </pre>
     </div>
   );

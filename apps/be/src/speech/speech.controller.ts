@@ -15,7 +15,7 @@ export class SpeechController {
     @UploadedFile() file: Express.Multer.File,
     @Body() dto: SpeechRequestDto,
   ): Promise<SpeechResponseDto> {
-    const transcript = await this.speechService.transcribe(file, dto);
-    return { transcript };
+    const { transcript, assessment } = await this.speechService.transcribe(file, dto);
+    return { transcript, assessment };
   }
 }
