@@ -14,13 +14,15 @@ const CircularWaveform = ({ isRecording, stream, onToggle }: CircularWaveformPro
   const canvasRef = useRef<HTMLCanvasElement>(null!);
   const animationRef = useRef<number | null>(null);
 
-  const { frequencyData } = useAudioVisualizer(stream);
+  const { frequencyDataRef } = useAudioVisualizer(stream);
   const { draw, drawIdle } = useCircularWaveformDraw(canvasRef);
 
   useEffect(() => {
-    if (isRecording && frequencyData.length > 0) {
+    if (isRecording) {
       const animate = () => {
-        draw(frequencyData);
+        if (frequencyDataRef.current.length > 0) {
+          draw(frequencyDataRef.current);
+        }
         animationRef.current = requestAnimationFrame(animate);
       };
       animate();
@@ -37,7 +39,7 @@ const CircularWaveform = ({ isRecording, stream, onToggle }: CircularWaveformPro
         animationRef.current = null;
       }
     };
-  }, [isRecording, frequencyData, draw]);
+  }, [isRecording, frequencyDataRef, draw]);
 
   useEffect(() => {
     if (!isRecording) {

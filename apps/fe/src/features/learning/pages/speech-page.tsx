@@ -65,7 +65,7 @@ const SpeechPage = () => {
       <header className="w-full max-w-3xl flex items-center justify-between mb-10 text-slate-500">
         <button className="flex items-center hover:text-slate-800 transition-colors">
           <ArrowLeft className="w-5 h-5 mr-2" />
-          <span className="font-medium">운영체제 (Operating System)</span>
+          <span className="font-medium">네트워크 (Network)</span>
         </button>
         <div className="flex items-center space-x-2">
           <span className="bg-orange-50 text-orange-600 px-3 py-1 rounded-full text-xs font-bold">

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface UseAudioVisualizerOptions {
   fftSize?: number; // 2의 거듭제곱 (32 ~ 32768), 기본값 512
@@ -12,8 +12,8 @@ const useAudioVisualizer = (
 ) => {
   const { fftSize = 512, smoothingTimeConstant = 0.8, fps = 60 } = options;
 
-  const [frequencyData, setFrequencyData] = useState<Uint8Array>(new Uint8Array(0));
-  const [waveformData, setWaveformData] = useState<Uint8Array>(new Uint8Array(0));
+  const frequencyDataRef = useRef<Uint8Array>(new Uint8Array(0));
+  const waveformDataRef = useRef<Uint8Array>(new Uint8Array(0));
 
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
@@ -57,10 +57,10 @@ const useAudioVisualizer = (
         lastFrameTimeRef.current = currentTime - (elapsed % frameInterval);
 
         analyserRef.current.getByteFrequencyData(freqDataArray);
-        setFrequencyData(new Uint8Array(freqDataArray));
+        frequencyDataRef.current = freqDataArray;
 
         analyserRef.current.getByteTimeDomainData(waveDataArray);
-        setWaveformData(new Uint8Array(waveDataArray));
+        waveformDataRef.current = waveDataArray;
       };
 
       updateData(performance.now());
@@ -91,13 +91,13 @@ const useAudioVisualizer = (
     }
 
     analyserRef.current = null;
-    setFrequencyData(new Uint8Array(0));
-    setWaveformData(new Uint8Array(0));
+    frequencyDataRef.current = new Uint8Array(0);
+    waveformDataRef.current = new Uint8Array(0);
   };
 
   return {
-    frequencyData,
-    waveformData,
+    frequencyDataRef,
+    waveformDataRef,
   };
 };
 

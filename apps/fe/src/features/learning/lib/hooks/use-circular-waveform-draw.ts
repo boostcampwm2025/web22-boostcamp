@@ -63,9 +63,9 @@ const useCircularWaveformDraw = (
       }
 
       for (let i = 0; i < bars; i++) {
-        const targetHeight = (smoothedRaw[i] ?? 0 / 255) * maxBarHeight + 3;
+        const targetHeight = ((smoothedRaw[i] ?? 0) / 255) * maxBarHeight + 3;
 
-        const smoothedHeight = prevValuesRef.current[i] ?? 0 * 0.7 + targetHeight * 0.3;
+        const smoothedHeight = (prevValuesRef.current[i] ?? 0) * 0.7 + targetHeight * 0.3;
         prevValuesRef.current[i] = smoothedHeight;
 
         const angle = i * sliceAngle - Math.PI / 2;
