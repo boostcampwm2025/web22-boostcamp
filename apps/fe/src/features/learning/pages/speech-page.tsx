@@ -124,7 +124,7 @@ const sendAudioToServer = async (blob: Blob) => {
     const form = new FormData();
     form.append('audio', blob, 'record.wav');
 
-    const res = await fetch('/speech/stt', {
+    const res = await fetch('/api/speech/stt', {
       method: 'POST',
       body: form,
     });
